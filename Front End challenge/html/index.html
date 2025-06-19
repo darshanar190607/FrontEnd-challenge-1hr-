@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerBI Dashboard - Analytics & Insights</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Enhanced Loader Section -->
+    <div id="loader" class="loader-container">
+        <div class="loader-background"></div>
+        <div class="loader-content">
+            <div class="loader-logo">
+                <div class="logo-container">
+                    <div class="logo-circle">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="logo-rings">
+                        <div class="ring ring-1"></div>
+                        <div class="ring ring-2"></div>
+                        <div class="ring ring-3"></div>
+                    </div>
+                </div>
+                <h2 class="loader-title">PowerBI Dashboard</h2>
+                <p class="loader-subtitle">Analytics & Business Intelligence</p>
+            </div>
+            
+            <div class="loader-progress-container">
+                <div class="loader-progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <div class="progress-glow"></div>
+                </div>
+                <div class="progress-percentage" id="progressPercentage">0%</div>
+            </div>
+            
+            <div class="loader-text">
+                <p id="loadingText">Initializing Analytics Engine...</p>
+            </div>
+            
+            <div class="loader-timer">
+                <i class="fas fa-clock"></i>
+                <span id="timer">0.0</span>s
+            </div>
+        </div>
+        
+        <!-- Animated Background Elements -->
+        <div class="loader-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <!-- Data Flow Animation -->
+        <div class="data-flow">
+            <div class="data-point"></div>
+            <div class="data-point"></div>
+            <div class="data-point"></div>
+            <div class="data-point"></div>
+            <div class="data-point"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="main-content" style="display: none;">
+        <!-- Navigation with Dark Mode Toggle -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#" data-aos="fade-right">
+                    <i class="fas fa-chart-line me-2"></i>
+                    PowerBI Pro
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Solutions
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#reports">Reports</a></li>
+                                <li><a class="dropdown-item" href="#forecasts">Forecasts</a></li>
+                                <li><a class="dropdown-item" href="#dashboards">Dashboards</a></li>
+                                <li><a class="dropdown-item" href="#consolidations">Consolidations</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#brand-kits">Brand Kits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#customers">Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#testimonials">Testimonials</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light btn-sm ms-2" id="darkModeToggle">
+                                <i class="fas fa-moon" id="darkModeIcon"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Enhanced Hero Section with Interactive Parallax -->
+        <section id="home" class="hero-section parallax-container">
+            <div class="parallax-bg" data-speed="0.5"></div>
+            <div class="parallax-layer-1" data-speed="0.3"></div>
+            <div class="parallax-layer-2" data-speed="0.7"></div>
+            
+            <!-- Interactive Graph Overlay -->
+            <div class="hero-interactive-graph" id="heroInteractiveGraph">
+                <canvas id="interactiveChart" width="300" height="200"></canvas>
+            </div>
+            
+            <!-- Cursor Following Elements -->
+            <div class="cursor-follower" id="cursorFollower">
+                <div class="follower-dot"></div>
+                <div class="follower-ring"></div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="container">
+                    <div class="row align-items-center min-vh-100">
+                        <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                            <h1 class="hero-title">
+                                Transform Your Data Into 
+                                <span class="gradient-text">Powerful Insights</span>
+                            </h1>
+                            <p class="hero-subtitle">
+                                Unlock the full potential of your business data with our advanced PowerBI solutions. 
+                                Create stunning dashboards, generate actionable reports, and make data-driven decisions.
+                            </p>
+                            <div class="hero-buttons">
+                                <button class="btn btn-primary btn-lg ripple-effect me-3">
+                                    <i class="fas fa-rocket me-2"></i>Get Started
+                                </button>
+                                <button class="btn btn-outline-light btn-lg ripple-effect">
+                                    <i class="fas fa-play me-2"></i>Watch Demo
+                                </button>
+                            </div>
+                            <div class="hero-stats mt-4">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h3 class="stat-number" data-count="500">0</h3>
+                                            <p class="stat-label">Active Users</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h3 class="stat-number" data-count="1200">0</h3>
+                                            <p class="stat-label">Dashboards</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h3 class="stat-number" data-count="99">0</h3>
+                                            <p class="stat-label">% Uptime</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+                            <div class="hero-dashboard">
+                                <div class="dashboard-mockup">
+                                    <div class="dashboard-header">
+                                        <div class="dashboard-controls">
+                                            <span class="control red"></span>
+                                            <span class="control yellow"></span>
+                                            <span class="control green"></span>
+                                        </div>
+                                        <h4>Sales Analytics Dashboard</h4>
+                                    </div>
+                                    <div class="dashboard-content">
+                                        <div class="chart-container">
+                                            <canvas id="heroChart" width="400" height="200"></canvas>
+                                        </div>
+                                        <div class="dashboard-metrics">
+                                            <div class="metric">
+                                                <span class="metric-value">$2.4M</span>
+                                                <span class="metric-label">Revenue</span>
+                                            </div>
+                                            <div class="metric">
+                                                <span class="metric-value">+15%</span>
+                                                <span class="metric-label">Growth</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+                <span class="scroll-text">Scroll to explore</span>
+            </div>
+            
+            <!-- Floating Data Visualization -->
+            <div class="floating-viz">
+                <div class="viz-item" style="top: 20%; left: 10%;">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </div>
+                <div class="viz-item" style="top: 60%; right: 15%;">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </div>
+                <div class="viz-item" style="bottom: 30%; left: 20%;">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Insights</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Parallax Section -->
+        <section class="enhanced-parallax-section">
+            <div class="parallax-container">
+                <div class="parallax-bg-image" data-speed="0.2"></div>
+                <div class="parallax-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 text-center" data-aos="fade-up">
+                                <h2 class="section-title text-white">Data-Driven Excellence</h2>
+                                <p class="section-subtitle text-white">Experience the power of advanced analytics</p>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                                <div class="parallax-card">
+                                    <div class="card-icon">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <h4>AI-Powered</h4>
+                                    <p>Machine learning algorithms that adapt to your data patterns</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                                <div class="parallax-card">
+                                    <div class="card-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <h4>Real-Time</h4>
+                                    <p>Instant insights with live data processing and visualization</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                                <div class="parallax-card">
+                                    <div class="card-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h4>Secure</h4>
+                                    <p>Enterprise-grade security with advanced data protection</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Carousel Section -->
+        <section id="solutions" class="solutions-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-5" data-aos="fade-up">
+                        <h2 class="section-title">Our PowerBI Solutions</h2>
+                        <p class="section-subtitle">Comprehensive analytics solutions tailored for your business needs</p>
+                    </div>
+                </div>
+                <div id="solutionsCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#solutionsCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#solutionsCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#solutionsCarousel" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#solutionsCarousel" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6" data-aos="fade-right">
+                                    <div class="solution-content">
+                                        <h3>Advanced Reports</h3>
+                                        <p>Create comprehensive reports with real-time data visualization and automated insights.</p>
+                                        <ul class="solution-features">
+                                            <li><i class="fas fa-check"></i> Real-time data processing</li>
+                                            <li><i class="fas fa-check"></i> Automated report generation</li>
+                                            <li><i class="fas fa-check"></i> Custom templates</li>
+                                            <li><i class="fas fa-check"></i> Export to multiple formats</li>
+                                        </ul>
+                                        <button class="btn btn-primary ripple-effect">Learn More</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" data-aos="fade-left">
+                                    <div class="solution-image">
+                                        <div class="chart-preview">
+                                            <canvas id="reportsChart" width="400" height="300"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6" data-aos="fade-right">
+                                    <div class="solution-content">
+                                        <h3>Predictive Forecasts</h3>
+                                        <p>Leverage AI-powered forecasting to predict trends and make informed business decisions.</p>
+                                        <ul class="solution-features">
+                                            <li><i class="fas fa-check"></i> Machine learning algorithms</li>
+                                            <li><i class="fas fa-check"></i> Trend analysis</li>
+                                            <li><i class="fas fa-check"></i> Risk assessment</li>
+                                            <li><i class="fas fa-check"></i> Scenario planning</li>
+                                        </ul>
+                                        <button class="btn btn-primary ripple-effect">Learn More</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" data-aos="fade-left">
+                                    <div class="solution-image">
+                                        <div class="chart-preview">
+                                            <canvas id="forecastChart" width="400" height="300"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6" data-aos="fade-right">
+                                    <div class="solution-content">
+                                        <h3>Interactive Dashboards</h3>
+                                        <p>Build stunning, interactive dashboards that provide real-time insights at a glance.</p>
+                                        <ul class="solution-features">
+                                            <li><i class="fas fa-check"></i> Drag & drop interface</li>
+                                            <li><i class="fas fa-check"></i> Real-time updates</li>
+                                            <li><i class="fas fa-check"></i> Mobile responsive</li>
+                                            <li><i class="fas fa-check"></i> Custom widgets</li>
+                                        </ul>
+                                        <button class="btn btn-primary ripple-effect">Learn More</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" data-aos="fade-left">
+                                    <div class="solution-image">
+                                        <div class="chart-preview">
+                                            <canvas id="dashboardChart" width="400" height="300"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6" data-aos="fade-right">
+                                    <div class="solution-content">
+                                        <h3>Data Consolidations</h3>
+                                        <p>Seamlessly integrate and consolidate data from multiple sources into unified insights.</p>
+                                        <ul class="solution-features">
+                                            <li><i class="fas fa-check"></i> Multi-source integration</li>
+                                            <li><i class="fas fa-check"></i> Data cleansing</li>
+                                            <li><i class="fas fa-check"></i> Automated workflows</li>
+                                            <li><i class="fas fa-check"></i> Data governance</li>
+                                        </ul>
+                                        <button class="btn btn-primary ripple-effect">Learn More</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" data-aos="fade-left">
+                                    <div class="solution-image">
+                                        <div class="chart-preview">
+                                            <canvas id="consolidationChart" width="400" height="300"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#solutionsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#solutionsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Kits Section -->
+        <section id="brand-kits" class="brand-kits-section parallax-container py-5">
+            <div class="parallax-bg" data-speed="0.3"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-5" data-aos="fade-up">
+                        <h2 class="section-title text-white">Brand Kits & Templates</h2>
+                        <p class="section-subtitle text-white">Professional templates and brand kits for consistent reporting</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="brand-kit-card ripple-effect">
+                            <div class="brand-kit-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h4>Corporate Templates</h4>
+                            <p>Professional templates designed for corporate reporting and presentations.</p>
+                            <div class="brand-kit-features">
+                                <span class="feature-tag">50+ Templates</span>
+                                <span class="feature-tag">Customizable</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="brand-kit-card ripple-effect">
+                            <div class="brand-kit-icon">
+                                <i class="fas fa-swatchbook"></i>
+                            </div>
+                            <h4>Color Schemes</h4>
+                            <p>Carefully curated color palettes that enhance data visualization and readability.</p>
+                            <div class="brand-kit-features">
+                                <span class="feature-tag">20+ Palettes</span>
+                                <span class="feature-tag">Accessible</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="brand-kit-card ripple-effect">
+                            <div class="brand-kit-icon">
+                                <i class="fas fa-font"></i>
+                            </div>
+                            <h4>Typography Sets</h4>
+                            <p>Professional font combinations optimized for data presentation and readability.</p>
+                            <div class="brand-kit-features">
+                                <span class="feature-tag">15+ Font Sets</span>
+                                <span class="feature-tag">Web Safe</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Section -->
+        <section id="customers" class="customers-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-5" data-aos="fade-up">
+                        <h2 class="section-title">Trusted by Industry Leaders</h2>
+                        <p class="section-subtitle">Join thousands of companies that rely on our PowerBI solutions</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="customer-card">
+                            <div class="customer-logo">
+                                <i class="fab fa-microsoft"></i>
+                            </div>
+                            <h5>Microsoft</h5>
+                            <p>Enterprise Solutions</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="customer-card">
+                            <div class="customer-logo">
+                                <i class="fab fa-amazon"></i>
+                            </div>
+                            <h5>Amazon</h5>
+                            <p>E-commerce Analytics</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="customer-card">
+                            <div class="customer-logo">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <h5>Google</h5>
+                            <p>Data Intelligence</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="customer-card">
+                            <div class="customer-logo">
+                                <i class="fab fa-apple"></i>
+                            </div>
+                            <h5>Apple</h5>
+                            <p>Business Intelligence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Services Section -->
+        <section id="services" class="services-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-5" data-aos="fade-up">
+                        <h2 class="section-title">Featured Services</h2>
+                        <p class="section-subtitle">Learn PowerBI basics and advanced techniques with our comprehensive guides</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-card ripple-effect">
+                            <div class="service-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h4>PowerBI Basics</h4>
+                            <p>Start your journey with fundamental concepts and basic dashboard creation.</p>
+                            <ul class="service-features">
+                                <li>Data connection basics</li>
+                                <li>Simple visualizations</li>
+                                <li>Report creation</li>
+                                <li>Sharing and collaboration</li>
+                            </ul>
+                            <button class="btn btn-outline-primary">Start Learning</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-card ripple-effect">
+                            <div class="service-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Advanced Analytics</h4>
+                            <p>Master complex data modeling and advanced analytical techniques.</p>
+                            <ul class="service-features">
+                                <li>DAX formulas</li>
+                                <li>Data modeling</li>
+                                <li>Advanced visualizations</li>
+                                <li>Performance optimization</li>
+                            </ul>
+                            <button class="btn btn-outline-primary">Explore Advanced</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-card ripple-effect">
+                            <div class="service-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4>Team Collaboration</h4>
+                            <p>Learn how to effectively collaborate and share insights across your organization.</p>
+                            <ul class="service-features">
+                                <li>Workspace management</li>
+                                <li>Security and permissions</li>
+                                <li>App distribution</li>
+                                <li>Governance best practices</li>
+                            </ul>
+                            <button class="btn btn-outline-primary">Team Setup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Graph Section -->
+        <section id="analytics" class="analytics-section parallax-container py-5">
+            <div class="parallax-bg" data-speed="0.4"></div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <h2 class="section-title text-white">Real-Time Analytics</h2>
+                        <p class="section-subtitle text-white">Monitor your business performance with live data visualization</p>
+                        <div class="analytics-stats">
+                            <div class="stat-item">
+                                <h3 class="stat-number text-white" data-count="2400">0</h3>
+                                <p class="stat-label text-white">Data Points Processed</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 class="stat-number text-white" data-count="150">0</h3>
+                                <p class="stat-label text-white">Active Dashboards</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 class="stat-number text-white" data-count="99.9">0</h3>
+                                <p class="stat-label text-white">% Accuracy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="analytics-chart-container">
+                            <canvas id="analyticsChart" width="500" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Showcase -->
+        <section id="products" class="products-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-5" data-aos="fade-up">
+                        <h2 class="section-title">Our Main Products</h2>
+                        <p class="section-subtitle">Comprehensive suite of business intelligence tools</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-card featured ripple-effect">
+                            <div class="product-header">
+                                <div class="product-icon">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <div class="product-badge">Featured</div>
+                            </div>
+                            <h3>PowerBI Pro Dashboard</h3>
+                            <p>Complete dashboard solution with advanced analytics and real-time monitoring capabilities.</p>
+                            <div class="product-features">
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Real-time data processing</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Advanced visualizations</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Custom integrations</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Mobile responsive</span>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$99</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <button class="btn btn-primary btn-lg w-100 ripple-effect">Get Started</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-card ripple-effect">
+                            <div class="product-header">
+                                <div class="product-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                            </div>
+                            <h3>Analytics Suite</h3>
+                            <p>Comprehensive analytics platform for data-driven decision making and business intelligence.</p>
+                            <div class="product-features">
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Predictive analytics</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Machine learning models</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>Automated reporting</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check"></i>
+                                    <span>API integrations</span>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <span class="price">$149</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-lg w-100 ripple-effect">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-5" data-aos="fade-up">
+                        <h2 class="section-title">What Our Customers Say</h2>
+                        <p class="section-subtitle">Real feedback from satisfied customers</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>"PowerBI Pro has transformed how we analyze our business data. The dashboards are intuitive and the insights are actionable."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="author-info">
+                                    <h5>Sarah Johnson</h5>
+                                    <span>Data Analyst, TechCorp</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>"The real-time analytics and forecasting capabilities have given us a competitive edge in the market."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="author-info">
+                                    <h5>Michael Chen</h5>
+                                    <span>CEO, StartupXYZ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>"Excellent customer support and the learning resources helped our team get up to speed quickly."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="author-info">
+                                    <h5>Emily Rodriguez</h5>
+                                    <span>Operations Manager, RetailPlus</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="footer-brand">
+                            <h4><i class="fas fa-chart-line me-2"></i>PowerBI Pro</h4>
+                            <p>Transform your data into powerful insights with our comprehensive business intelligence solutions.</p>
+                            <div class="social-links">
+                                <a href="#" class="social-link ripple-effect"><i class="fab fa-facebook"></i></a>
+                                <a href="#" class="social-link ripple-effect"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-link ripple-effect"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-link ripple-effect"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <div class="footer-links">
+                            <h5>Solutions</h5>
+                            <ul>
+                                <li><a href="#reports">Reports</a></li>
+                                <li><a href="#forecasts">Forecasts</a></li>
+                                <li><a href="#dashboards">Dashboards</a></li>
+                                <li><a href="#consolidations">Consolidations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <div class="footer-links">
+                            <h5>Resources</h5>
+                            <ul>
+                                <li><a href="#brand-kits">Brand Kits</a></li>
+                                <li><a href="#services">Learning Center</a></li>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">API Reference</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <div class="footer-links">
+                            <h5>Company</h5>
+                            <ul>
+                                <li><a href="#customers">Customers</a></li>
+                                <li><a href="#testimonials">Testimonials</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <div class="footer-links">
+                            <h5>Support</h5>
+                            <ul>
+                                <li><a href="#">Help Center</a></li>
+                                <li><a href="#">Community</a></li>
+                                <li><a href="#">Status</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <hr class="footer-divider">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p class="footer-copyright">
+                            © 2024 PowerBI Pro. All rights reserved. | Made with <i class="fas fa-heart text-danger"></i> for data enthusiasts
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../javascript/script.js"></script>
+</body>
+</html>
